@@ -1,0 +1,55 @@
+# Dependencies
+mobile/node_modules/
+
+# Expo
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+
+# Native build folders
+mobile/android/app/build/
+mobile/android/build/
+mobile/android/.gradle/
+mobile/ios/build/
+mobile/ios/Pods/
+
+# Gradle files
+mobile/*.iml
+mobile/.gradle/
+mobile/local.properties
+
+# Metro bundler
+mobile/.metro-health-check*
+
+# Environment variables
+mobile/.env
+mobile/.env.*
+!mobile/.env.example
+
+# IDE (these can stay global - applies to whole repo)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files (global)
+.DS_Store
+Thumbs.db
+
+# TypeScript
+mobile/*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+mobile/coverage/
+
+# EAS
+mobile/.easignore
+
+# Backend (add paths here when you have backend code)
+backend/node_modules/
