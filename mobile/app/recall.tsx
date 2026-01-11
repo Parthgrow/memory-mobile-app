@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const TIMER_DURATION = 120; // 2 minutes
-
 const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
@@ -24,21 +22,24 @@ export default function RecallScreen() {
     words: wordsParam,
     rows,
     cols,
+    recallTimer,
   } = useLocalSearchParams<{
     words: string;
     rows: string;
     cols: string;
+    recallTimer: string;
   }>();
 
   const words: string[][] = wordsParam ? JSON.parse(wordsParam) : [];
   const numRows = parseInt(rows || "4", 10);
   const numCols = parseInt(cols || "4", 10);
+  const timerDuration = parseInt(recallTimer || "2", 10) * 60; // Convert minutes to seconds
 
   const [userAnswers, setUserAnswers] = useState<string[][]>(() =>
     Array.from({ length: numRows }, () => Array(numCols).fill(""))
   );
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(TIMER_DURATION);
+  const [timeRemaining, setTimeRemaining] = useState(timerDuration);
   const [isComplete, setIsComplete] = useState(false);
 
   const currentRowWords = words[currentRowIndex] || [];

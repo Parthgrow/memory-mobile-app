@@ -5,10 +5,12 @@ import Toast from "react-native-toast-message";
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
-  const router = useRouter(); 
-  const [rows, setRows] = useState('1');
-  const [columns, setColumns] = useState('1');
-  const [target, setTarget] = useState('1'); 
+  const router = useRouter();
+  const [rows, setRows] = useState("1");
+  const [columns, setColumns] = useState("1");
+  const [target, setTarget] = useState("1");
+  const [practiceTimer, setPracticeTimer] = useState("1");
+  const [recallTimer, setRecallTimer] = useState("2");
 
   const showToast = (type: string, text: string) => {
     Toast.show({
@@ -18,17 +20,22 @@ export default function HomeScreen() {
   };
 
   const handleStartSession = () => {
-    const numRows = parseInt(rows,10); 
-    const numCols = parseInt(columns,10); 
+    const numRows = parseInt(rows, 10);
+    const numCols = parseInt(columns, 10);
     if (isNaN(numRows) || isNaN(numCols)) {
       showToast("error", "Rows and columns cannot be empty");
-      return ; 
+      return;
     }
 
     router.push({
-      pathname : "/practice",
-      params : {rows : numRows, cols : numCols}
-    })
+      pathname: "/practice",
+      params: {
+        rows: numRows,
+        cols: numCols,
+        practiceTimer: practiceTimer,
+        recallTimer: recallTimer,
+      },
+    });
   };
 
   return (
@@ -52,10 +59,10 @@ export default function HomeScreen() {
             placeholder="Enter the number of rows"
             keyboardType="numeric"
             value={rows}
-            onChangeText={(text) => setRows(text.replace(/[^0-9]/g, ''))}
+            onChangeText={(text) => setRows(text.replace(/[^0-9]/g, ""))}
             style={{
-              borderColor: 'black',
-              borderWidth : 1,
+              borderColor: "black",
+              borderWidth: 1,
               width: 80, // Set a good width for the TextInput
             }}
           />
@@ -67,19 +74,19 @@ export default function HomeScreen() {
             flexDirection: "row",
             alignItems: "center",
             gap: "2",
-            marginTop : 22
+            marginTop: 22,
           }}
         >
-          <Text style={{marginRight : 22}}>Select Columns</Text>
+          <Text style={{ marginRight: 22 }}>Select Columns</Text>
           <TextInput
             placeholder="Enter the number of columns"
             keyboardType="numeric"
             value={columns}
-            onChangeText={(text) => setColumns(text.replace(/[^0-9]/g, ''))}
+            onChangeText={(text) => setColumns(text.replace(/[^0-9]/g, ""))}
             style={{
-              borderColor : 'black',
-              borderWidth : 1,
-              width : 80
+              borderColor: "black",
+              borderWidth: 1,
+              width: 80,
             }}
           />
         </View>
@@ -90,19 +97,67 @@ export default function HomeScreen() {
             flexDirection: "row",
             alignItems: "center",
             gap: "2",
-            marginTop : 22
+            marginTop: 22,
           }}
         >
-          <Text style={{marginRight : 22}}>Target</Text>
+          <Text style={{ marginRight: 22 }}>Target</Text>
           <TextInput
             placeholder="Enter the number of columns"
             keyboardType="numeric"
             value={target}
-            onChangeText={(text) => setTarget(text.replace(/[^0-9]/g, ''))}
+            onChangeText={(text) => setTarget(text.replace(/[^0-9]/g, ""))}
             style={{
-              borderColor : 'black',
-              borderWidth : 1,
-              width : 80
+              borderColor: "black",
+              borderWidth: 1,
+              width: 80,
+            }}
+          />
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 22,
+          }}
+        >
+          <Text style={{ marginRight: 22 }}>Practice Timer (min)</Text>
+          <TextInput
+            placeholder="1"
+            keyboardType="numeric"
+            value={practiceTimer}
+            onChangeText={(text) =>
+              setPracticeTimer(text.replace(/[^0-9]/g, ""))
+            }
+            style={{
+              borderColor: "black",
+              borderWidth: 1,
+              width: 80,
+              textAlign: "center",
+            }}
+          />
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 22,
+          }}
+        >
+          <Text style={{ marginRight: 22 }}>Recall Timer (min)</Text>
+          <TextInput
+            placeholder="2"
+            keyboardType="numeric"
+            value={recallTimer}
+            onChangeText={(text) => setRecallTimer(text.replace(/[^0-9]/g, ""))}
+            style={{
+              borderColor: "black",
+              borderWidth: 1,
+              width: 80,
+              textAlign: "center",
             }}
           />
         </View>

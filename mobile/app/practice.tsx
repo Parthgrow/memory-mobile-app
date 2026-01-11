@@ -4,8 +4,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getWords } from "./data/words";
 
-const TIMER_DURATION = 60; // seconds
-
 const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
@@ -14,13 +12,19 @@ const formatTime = (seconds: number): string => {
 
 export default function PracticeScreen() {
   const router = useRouter();
-  const { rows, cols } = useLocalSearchParams<{ rows: string; cols: string }>();
+  const { rows, cols, practiceTimer, recallTimer } = useLocalSearchParams<{
+    rows: string;
+    cols: string;
+    practiceTimer: string;
+    recallTimer: string;
+  }>();
 
   const numRows = parseInt(rows || "4", 10);
   const numCols = parseInt(cols || "4", 10);
+  const timerDuration = parseInt(practiceTimer || "1", 10) * 60; // Convert minutes to seconds
 
   const [currentRowIndex, setCurrentRowIndex] = useState(0);
-  const [timeRemaining, setTimeRemaining] = useState(TIMER_DURATION);
+  const [timeRemaining, setTimeRemaining] = useState(timerDuration);
 
   // Generate words grid once on mount
   const words = useMemo(() => getWords(numRows, numCols), [numRows, numCols]);
@@ -51,10 +55,11 @@ export default function PracticeScreen() {
           words: JSON.stringify(words),
           rows: numRows.toString(),
           cols: numCols.toString(),
+          recallTimer: recallTimer || "2",
         },
       });
     }
-  }, [timeRemaining, router, words, numRows, numCols]);
+  }, [timeRemaining, router, words, numRows, numCols, recallTimer]);
 
   const handlePrevious = () => {
     if (currentRowIndex > 0) {
@@ -75,6 +80,7 @@ export default function PracticeScreen() {
         words: JSON.stringify(words),
         rows: numRows.toString(),
         cols: numCols.toString(),
+        recallTimer: recallTimer || "120",
       },
     });
   };
