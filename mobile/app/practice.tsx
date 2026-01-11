@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getWords } from "./data/words";
+import { getWords } from "../data/words";
 
 const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
