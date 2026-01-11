@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Colors, radius } from "@/constants/theme";
 
 interface Mistake {
   row: number;
@@ -147,7 +148,7 @@ export default function ResultsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.background,
   },
   scrollContent: {
     padding: 20,
@@ -163,18 +164,19 @@ const styles = StyleSheet.create({
   },
   scoreTitle: {
     fontSize: 18,
-    color: "#666",
+    color: Colors.textSecondary,
     marginBottom: 8,
+    fontWeight: "400",
   },
   scoreValue: {
     fontSize: 48,
-    fontWeight: "700",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   percentage: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#666",
+    fontWeight: "500",
+    color: Colors.textSecondary,
     marginTop: 4,
   },
   statsContainer: {
@@ -184,15 +186,20 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    borderRadius: 12,
+    borderRadius: radius.md,
     padding: 16,
     alignItems: "center",
+    backgroundColor: Colors.background,
+    borderWidth: 1,
+    borderColor: Colors.border,
   },
   correctCard: {
-    backgroundColor: "#d4edda",
+    borderColor: Colors.success,
+    borderWidth: 2,
   },
   incorrectCard: {
-    backgroundColor: "#f8d7da",
+    borderColor: Colors.border,
+    borderWidth: 1,
   },
   statIcon: {
     fontSize: 24,
@@ -200,40 +207,43 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
-    color: "#666",
+    color: Colors.textSecondary,
     marginBottom: 4,
+    fontWeight: "400",
   },
   statValue: {
     fontSize: 28,
-    fontWeight: "700",
+    fontWeight: "500",
   },
   correctValue: {
-    color: "#155724",
+    color: Colors.success,
   },
   incorrectValue: {
-    color: "#721c24",
+    color: Colors.textSecondary,
   },
   mistakesSection: {
     marginBottom: 30,
   },
   mistakesTitle: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
     marginBottom: 16,
   },
   mistakeCard: {
-    backgroundColor: "#f8f9fa",
-    borderRadius: 12,
+    backgroundColor: Colors.background,
+    borderRadius: radius.md,
     padding: 16,
     marginBottom: 12,
-    borderLeftWidth: 4,
-    borderLeftColor: "#dc3545",
+    borderLeftWidth: 2,
+    borderLeftColor: Colors.border,
+    borderWidth: 1,
+    borderColor: Colors.border,
   },
   mistakePosition: {
     fontSize: 14,
-    fontWeight: "600",
-    color: "#666",
+    fontWeight: "500",
+    color: Colors.textSecondary,
     marginBottom: 8,
   },
   mistakeDetails: {
@@ -241,24 +251,26 @@ const styles = StyleSheet.create({
   },
   mistakeUserAnswer: {
     fontSize: 16,
-    color: "#721c24",
+    color: Colors.textSecondary,
   },
   mistakeUserAnswerValue: {
-    fontWeight: "600",
+    fontWeight: "500",
   },
   mistakeCorrect: {
     fontSize: 16,
-    color: "#155724",
+    color: Colors.textPrimary,
   },
   mistakeCorrectValue: {
-    fontWeight: "600",
+    fontWeight: "500",
   },
   perfectSection: {
     alignItems: "center",
     marginBottom: 30,
     padding: 20,
-    backgroundColor: "#d4edda",
-    borderRadius: 12,
+    backgroundColor: Colors.background,
+    borderRadius: radius.md,
+    borderWidth: 2,
+    borderColor: Colors.success,
   },
   perfectEmoji: {
     fontSize: 48,
@@ -266,27 +278,27 @@ const styles = StyleSheet.create({
   },
   perfectText: {
     fontSize: 24,
-    fontWeight: "700",
-    color: "#155724",
+    fontWeight: "500",
+    color: Colors.success,
   },
   perfectSubtext: {
     fontSize: 16,
-    color: "#155724",
+    color: Colors.textSecondary,
     marginTop: 4,
   },
   buttonContainer: {
     marginTop: 10,
   },
   homeButton: {
-    backgroundColor: "#000",
+    backgroundColor: Colors.primary,
     paddingVertical: 16,
-    borderRadius: 12,
+    borderRadius: radius.md,
     alignItems: "center",
   },
   homeButtonText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: "500",
   },
 });
 

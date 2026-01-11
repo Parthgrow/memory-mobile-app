@@ -1,32 +1,47 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Mind Gym Design System
+ * 
+ * Design Philosophy:
+ * - White = space to think
+ * - Blue = clarity & direction
+ * - Minimal accents = discipline
+ * 
+ * This is intellectual, sky-inspired, ink-on-paper blue.
+ * Not medical blue. No gradients, no neon.
  */
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
-
 export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
+  // Primary Colors
+  primary: '#1E3A8A', // deep thinking blue
+  background: '#FAFBFC', // soft white, not pure
+  
+  // Text Colors
+  textPrimary: '#0F172A', // ink black
+  textSecondary: '#475569', // calm gray
+  
+  // UI Colors
+  border: '#E2E8F0', // subtle line
+  divider: '#E2E8F0', // subtle line
+  
+  // Accent (Use Sparingly)
+  accent: '#3B82F6', // only for active states
+  success: '#4ADE80', // rare, streaks only
+  
+  // Navigation (for tab bars)
+  tabIconDefault: '#94A3B8',
+  tabIconSelected: '#1E3A8A',
+  
+  // Legacy compatibility (will be phased out)
+  tint: '#1E3A8A',
+  icon: '#94A3B8',
 };
 
+// Typography
+// System font only - no decorative fonts
+// Headings: Medium weight
+// Body: Regular weight
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
@@ -51,3 +66,12 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+// Shape Language
+// Radius: 6-8 only
+// No shadows (or 1% shadow max)
+// More padding > more colors
+export const radius = {
+  sm: 6,
+  md: 8,
+};

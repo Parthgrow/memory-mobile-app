@@ -1,0 +1,147 @@
+# Mind Gym Design System Rules
+
+## Design Philosophy
+
+This is **not medical blue**. This is **intellectual, sky-inspired, ink-on-paper blue**.
+
+**Core Principles:**
+
+- **White = space to think** - White is the main canvas
+- **Blue = clarity & direction** - Blue only for intent & action
+- **Minimal accents = discipline** - Use sparingly
+- **No gradients, no neon** - Flat, clean surfaces
+
+## Color Usage Rules
+
+### ✅ DO
+
+- Use white (#FAFBFC) as the main background canvas
+- Use blue (#1E3A8A) only for primary CTAs and important actions
+- Use gray (#475569) for most text (secondary text)
+- Use ink black (#0F172A) for primary text
+- Use accent blue (#3B82F6) only for active states
+- Use success (#4ADE80) rarely, only for streaks/achievements
+
+### ❌ AVOID
+
+- Light cyan / teal colors
+- Blue gradients
+- Blue backgrounds everywhere
+- Rounded pill buttons everywhere
+- Medical/hospital blue tones
+
+**Rule:** If everything is blue, nothing is important.
+
+## Typography Rules
+
+- **Font:** System font only (SF / Roboto) - no decorative fonts
+- **Headings:** Medium weight (500)
+- **Body text:** Regular weight (400)
+- **CTAs:** Medium weight (500)
+- **Avoid bold** unless absolutely necessary
+
+## Spacing & Shape Language
+
+- **Border radius:** Only 6px (sm) or 8px (md) - no other values
+- **Shadows:** None, or maximum 1% shadow
+- **Padding:** Generous padding > more colors
+- **White space:** Premium feel through spacing
+
+## Implementation Requirements
+
+### StyleSheet.create Only
+
+- **Always use `StyleSheet.create()`** for all styles
+- **Never use inline styles** or style objects
+- **Always reference theme colors** from `@/constants/theme`
+- Use semantic color names: `Colors.primary`, `Colors.background`, `Colors.textPrimary`, etc.
+
+### Example Pattern:
+
+```typescript
+import { StyleSheet } from "react-native";
+import { Colors, radius } from "@/constants/theme";
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.background,
+    padding: 20,
+  },
+  button: {
+    backgroundColor: Colors.primary,
+    borderRadius: radius.md,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+  },
+  text: {
+    color: Colors.textPrimary,
+    fontSize: 16,
+  },
+});
+```
+
+## Component Guidelines
+
+### Buttons
+
+- Primary CTA: Background `#1E3A8A`, text white, radius 8
+- Should be the bluest thing on screen
+- Generous padding
+
+### Chips/Tags
+
+- **Inactive:** Transparent background, border `#E2E8F0`, text `#475569`
+- **Active:** Background `#EFF6FF`, text `#1E3A8A`, no border
+
+### Navigation
+
+- **Inactive:** Icon and label `#94A3B8`
+- **Active:** Icon and label `#1E3A8A`
+- Background always white
+
+### Streaks/Consistency
+
+- Dots: neutral gray
+- Active dots: Accent blue `#3B82F6`
+- No progress bars
+
+## Anti-Patterns to Avoid
+
+1. ❌ Using blue for backgrounds (except primary CTAs)
+2. ❌ Using gradients or neon colors
+3. ❌ Inline styles instead of StyleSheet.create
+4. ❌ Hardcoded color values instead of theme colors
+5. ❌ Border radius values other than 6 or 8
+6. ❌ Heavy shadows or drop shadows
+7. ❌ Decorative fonts or custom font families
+8. ❌ Overusing bold text weight
+
+## Theme Reference
+
+Always import and use colors from `@/constants/theme`:
+
+```typescript
+import { Colors, radius, Fonts } from "@/constants/theme";
+```
+
+Available colors:
+
+- `Colors.primary` - #1E3A8A (deep thinking blue)
+- `Colors.background` - #FAFBFC (soft white)
+- `Colors.textPrimary` - #0F172A (ink black)
+- `Colors.textSecondary` - #475569 (calm gray)
+- `Colors.border` - #E2E8F0 (subtle line)
+- `Colors.accent` - #3B82F6 (active states only)
+- `Colors.success` - #4ADE80 (rare, streaks only)
+
+Available radius:
+
+- `radius.sm` - 6
+- `radius.md` - 8
+
+## Why This Works
+
+- ✔ Feels intelligent, not medical
+- ✔ Encourages focus, not dopamine
+- ✔ Scales well to dark mode later
+- ✔ Timeless (won't look dated in 2 years)

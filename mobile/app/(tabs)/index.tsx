@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 import { useRouter } from "expo-router";
+import { Colors, radius } from "@/constants/theme";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -40,125 +41,70 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Pressable
-          style={({ pressed }) => [styles.button]}
-          onPress={handleStartSession}
-        >
-          <Text style={styles.textWhite}>Start a Session</Text>
+      <View style={styles.content}>
+        <Pressable style={styles.button} onPress={handleStartSession}>
+          <Text style={styles.buttonText}>Start a Session</Text>
         </Pressable>
 
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ marginRight: 43 }}>Select Rows</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Select Rows</Text>
           <TextInput
             placeholder="Enter the number of rows"
+            placeholderTextColor={Colors.textSecondary}
             keyboardType="numeric"
             value={rows}
             onChangeText={(text) => setRows(text.replace(/[^0-9]/g, ""))}
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              width: 80, // Set a good width for the TextInput
-            }}
+            style={styles.input}
           />
         </View>
 
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "2",
-            marginTop: 22,
-          }}
-        >
-          <Text style={{ marginRight: 22 }}>Select Columns</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Select Columns</Text>
           <TextInput
             placeholder="Enter the number of columns"
+            placeholderTextColor={Colors.textSecondary}
             keyboardType="numeric"
             value={columns}
             onChangeText={(text) => setColumns(text.replace(/[^0-9]/g, ""))}
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              width: 80,
-            }}
+            style={styles.input}
           />
         </View>
 
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "2",
-            marginTop: 22,
-          }}
-        >
-          <Text style={{ marginRight: 22 }}>Target</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Target</Text>
           <TextInput
-            placeholder="Enter the number of columns"
+            placeholder="Enter target"
+            placeholderTextColor={Colors.textSecondary}
             keyboardType="numeric"
             value={target}
             onChangeText={(text) => setTarget(text.replace(/[^0-9]/g, ""))}
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              width: 80,
-            }}
+            style={styles.input}
           />
         </View>
 
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 22,
-          }}
-        >
-          <Text style={{ marginRight: 22 }}>Practice Timer (min)</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Practice Timer (min)</Text>
           <TextInput
             placeholder="1"
+            placeholderTextColor={Colors.textSecondary}
             keyboardType="numeric"
             value={practiceTimer}
             onChangeText={(text) =>
               setPracticeTimer(text.replace(/[^0-9]/g, ""))
             }
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              width: 80,
-              textAlign: "center",
-            }}
+            style={[styles.input, styles.inputCenter]}
           />
         </View>
 
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 22,
-          }}
-        >
-          <Text style={{ marginRight: 22 }}>Recall Timer (min)</Text>
+        <View style={styles.inputRow}>
+          <Text style={styles.label}>Recall Timer (min)</Text>
           <TextInput
             placeholder="2"
+            placeholderTextColor={Colors.textSecondary}
             keyboardType="numeric"
             value={recallTimer}
             onChangeText={(text) => setRecallTimer(text.replace(/[^0-9]/g, ""))}
-            style={{
-              borderColor: "black",
-              borderWidth: 1,
-              width: 80,
-              textAlign: "center",
-            }}
+            style={[styles.input, styles.inputCenter]}
           />
         </View>
       </View>
@@ -169,44 +115,50 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.background,
+  },
+  content: {
+    flex: 1,
     justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#fff",
+    padding: 24,
   },
   button: {
-    backgroundColor: "black",
-    textDecorationColor: "white",
+    backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
-    padding: 6,
-    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: radius.md,
+    marginBottom: 32,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 20,
-    textAlign: "center",
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "500",
   },
-  checkboxContainer: {
+  inputRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 15,
-  },
-  checkbox: {
-    width: 24,
-    height: 24,
-    borderWidth: 2,
-    borderColor: "#333",
-    borderRadius: 6,
-    marginRight: 10,
-  },
-  checkedBox: {
-    backgroundColor: "#4CAF50",
+    marginBottom: 20,
   },
   label: {
     fontSize: 16,
+    color: Colors.textPrimary,
+    marginRight: 16,
+    minWidth: 140,
   },
-  textWhite: {
-    color: "white",
+  input: {
+    borderColor: Colors.border,
+    borderWidth: 1,
+    borderRadius: radius.md,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: Colors.textPrimary,
+    width: 100,
+    backgroundColor: Colors.background,
+  },
+  inputCenter: {
+    textAlign: "center",
   },
 });

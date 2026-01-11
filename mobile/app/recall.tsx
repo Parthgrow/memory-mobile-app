@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Colors, radius } from "@/constants/theme";
 
 const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
@@ -193,7 +194,7 @@ export default function RecallScreen() {
               value={userAnswer}
               onChangeText={(text) => handleInputChange(index, text)}
               placeholder={`Word ${index + 1}`}
-              placeholderTextColor="#999"
+              placeholderTextColor={Colors.textSecondary}
               autoCapitalize="none"
               autoCorrect={false}
             />
@@ -240,7 +241,7 @@ export default function RecallScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.background,
     padding: 20,
   },
   header: {
@@ -251,33 +252,33 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: "700",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   timer: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   score: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   actionButton: {
-    backgroundColor: "#000",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+    backgroundColor: Colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: radius.md,
   },
   actionButtonText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   progress: {
     fontSize: 16,
-    color: "#666",
+    color: Colors.textSecondary,
     textAlign: "center",
     marginBottom: 30,
   },
@@ -292,47 +293,49 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   inputBox: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: Colors.background,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
-    borderRadius: 8,
+    borderColor: Colors.border,
+    borderRadius: radius.md,
     paddingVertical: 16,
     paddingHorizontal: 20,
     fontSize: 18,
     fontWeight: "500",
-    color: "#000",
+    color: Colors.textPrimary,
     textAlign: "center",
   },
   resultBox: {
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: radius.md,
     paddingVertical: 16,
     paddingHorizontal: 20,
     alignItems: "center",
   },
   correctBox: {
-    backgroundColor: "#d4edda",
-    borderColor: "#28a745",
+    backgroundColor: Colors.background,
+    borderColor: Colors.success,
+    borderWidth: 2,
   },
   incorrectBox: {
-    backgroundColor: "#f8d7da",
-    borderColor: "#dc3545",
+    backgroundColor: Colors.background,
+    borderColor: Colors.border,
+    borderWidth: 2,
   },
   userAnswerText: {
     fontSize: 18,
     fontWeight: "500",
   },
   correctText: {
-    color: "#155724",
+    color: Colors.success,
   },
   incorrectText: {
-    color: "#721c24",
+    color: Colors.textSecondary,
   },
   correctAnswerText: {
     fontSize: 14,
-    color: "#28a745",
+    color: Colors.textPrimary,
     marginTop: 4,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   navigation: {
     flexDirection: "row",
@@ -342,20 +345,21 @@ const styles = StyleSheet.create({
   },
   navButton: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: Colors.primary,
     paddingVertical: 14,
-    borderRadius: 8,
+    borderRadius: radius.md,
     alignItems: "center",
   },
   navButtonDisabled: {
-    backgroundColor: "#ccc",
+    backgroundColor: Colors.border,
+    opacity: 0.5,
   },
   navButtonText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   navButtonTextDisabled: {
-    color: "#999",
+    color: Colors.textSecondary,
   },
 });

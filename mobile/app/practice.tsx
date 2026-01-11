@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getWords } from "../data/words";
+import { Colors, radius } from "@/constants/theme";
 
 const formatTime = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
@@ -152,7 +153,7 @@ export default function PracticeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.background,
     padding: 20,
   },
   header: {
@@ -163,28 +164,28 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: "700",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   timer: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#000",
+    fontWeight: "500",
+    color: Colors.textPrimary,
   },
   recallButton: {
-    backgroundColor: "#000",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+    backgroundColor: Colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: radius.md,
   },
   recallButtonText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   progress: {
     fontSize: 16,
-    color: "#666",
+    color: Colors.textSecondary,
     textAlign: "center",
     marginBottom: 30,
   },
@@ -196,10 +197,10 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   wordBox: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: Colors.background,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
-    borderRadius: 8,
+    borderColor: Colors.border,
+    borderRadius: radius.md,
     paddingVertical: 16,
     paddingHorizontal: 20,
     alignItems: "center",
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   wordText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#000",
+    color: Colors.textPrimary,
   },
   navigation: {
     flexDirection: "row",
@@ -217,20 +218,21 @@ const styles = StyleSheet.create({
   },
   navButton: {
     flex: 1,
-    backgroundColor: "#000",
+    backgroundColor: Colors.primary,
     paddingVertical: 14,
-    borderRadius: 8,
+    borderRadius: radius.md,
     alignItems: "center",
   },
   navButtonDisabled: {
-    backgroundColor: "#ccc",
+    backgroundColor: Colors.border,
+    opacity: 0.5,
   },
   navButtonText: {
-    color: "#fff",
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
   },
   navButtonTextDisabled: {
-    color: "#999",
+    color: Colors.textSecondary,
   },
 });
