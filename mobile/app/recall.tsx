@@ -53,7 +53,7 @@ export default function RecallScreen() {
       row.forEach((word, colIdx) => {
         total++;
         const userAnswer = userAnswers[rowIdx]?.[colIdx] || "";
-        if (userAnswer === word) {
+        if (userAnswer.toLowerCase() === word.toLowerCase()) {
           correct++;
         }
       });
@@ -158,7 +158,7 @@ export default function RecallScreen() {
       >
         {currentRowWords.map((word, index) => {
           const userAnswer = currentRowAnswers[index] || "";
-          const isCorrect = userAnswer === word;
+          const isCorrect = userAnswer.toLowerCase() === word.toLowerCase();
 
           if (isComplete) {
             // Inline Results Mode

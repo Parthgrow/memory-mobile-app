@@ -40,7 +40,7 @@ export default function ResultsScreen() {
     row.forEach((word, colIdx) => {
       total++;
       const userAnswer = userAnswers[rowIdx]?.[colIdx] || "";
-      if (userAnswer === word) {
+      if (userAnswer.toLowerCase() === word.toLowerCase()) {
         correct++;
       } else {
         mistakes.push({
