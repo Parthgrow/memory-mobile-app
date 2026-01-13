@@ -44,7 +44,8 @@ export default function LoginScreen() {
         showToast('success', isRegister ? 'Account created successfully' : 'Logged in successfully');
         router.replace('/(tabs)');
       } else {
-        showToast('error', `${result.error}` || 'An error occurred');
+        console.log(`Error in loggin in : ${result.error}`); 
+        showToast('error', `Error in loggin in : ${result.error}` || 'An error occurred');
       }
     } catch (error) {
       showToast('error', 'An unexpected error occurred');

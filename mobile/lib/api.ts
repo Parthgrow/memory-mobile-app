@@ -72,10 +72,29 @@ export const api = {
   },
 
   login: async (email: string, password: string): Promise<ApiResponse<AuthResponse>> => {
-    return request<AuthResponse>('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch(`${API_URL}/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return {
+          error: data.error || 'An error occurred',
+        };
+      }
+
+      return { data };
+    } catch (error) {
+      return {
+        error: error instanceof Error ? error.message : 'Network error',
+      };
+    }
   },
 
   verify: async (token: string): Promise<ApiResponse<VerifyResponse>> => {
