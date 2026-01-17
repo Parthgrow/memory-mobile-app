@@ -20,7 +20,8 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.memorymobileapp"
+      "package": "com.anonymous.memorymobileapp",
+      "permissions": ["INTERNET"]
     },
     "web": {
       "output": "static",
