@@ -5,6 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-producti
 const JWT_EXPIRES_IN = '7d';
 
 export interface User {
+  userId: string;
   email: string;
   passwordHash: string;
   createdAt: string;

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { Hono } from 'hono'; 
 import {serve} from '@hono/node-server';
+import { randomUUID } from 'crypto';
 import { getKVClient } from './lib/kv.js';
 import {
   hashPassword,
@@ -59,8 +60,12 @@ app.post('/api/register', async (c) => {
     // Hash password
     const passwordHash = await hashPassword(password);
 
+    // Generate userId
+    const userId = randomUUID();
+
     // Store user
     const user: User = {
+      userId,
       email: email.toLowerCase(),
       passwordHash,
       createdAt: new Date().toISOString(),
@@ -74,6 +79,7 @@ app.post('/api/register', async (c) => {
     return c.json({
       token,
       user: {
+        userId: user.userId,
         email: user.email,
       },
     }, 201);
