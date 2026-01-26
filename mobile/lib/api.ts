@@ -1,3 +1,5 @@
+import { authStorage } from './auth';
+
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8001';
 
 export interface ApiResponse<T> {
@@ -32,6 +34,25 @@ export interface VerifyResponse {
     email: string;
   };
   error?: string;
+}
+
+export interface SaveScoreResponse {
+  success: boolean;
+  updated: boolean;
+}
+
+export interface DailyScore {
+  date: string;
+  highestScore: number;
+  updatedAt: number;
+}
+
+export interface MonthlySummary {
+  month: string;
+  practiceDays: number;
+  bestScore: number;
+  averageScore: number;
+  dailyScores: DailyScore[];
 }
 
 async function request<T>(
@@ -101,6 +122,56 @@ export const api = {
     return request<VerifyResponse>('/api/verify', {
       method: 'POST',
       body: JSON.stringify({ token }),
+    });
+  },
+
+  saveScore: async (
+    score: number,
+    date?: string
+  ): Promise<ApiResponse<SaveScoreResponse>> => {
+    const token = await authStorage.getToken();
+    if (!token) {
+      return { error: 'Not authenticated' };
+    }
+
+    return request<SaveScoreResponse>('/api/scores', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ score, date }),
+    });
+  },
+
+  getDailyScore: async (
+    date: string
+  ): Promise<ApiResponse<DailyScore | null>> => {
+    const token = await authStorage.getToken();
+    if (!token) {
+      return { error: 'Not authenticated' };
+    }
+
+    return request<DailyScore | null>(`/api/scores/daily/${date}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  getMonthlySummary: async (
+    month: string
+  ): Promise<ApiResponse<MonthlySummary>> => {
+    const token = await authStorage.getToken();
+    if (!token) {
+      return { error: 'Not authenticated' };
+    }
+
+    return request<MonthlySummary>(`/api/scores/monthly/${month}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
   },
 };

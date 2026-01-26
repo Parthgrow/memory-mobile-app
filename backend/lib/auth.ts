@@ -51,3 +51,39 @@ export const validatePassword = (password: string): boolean => {
   return password.length >= 6;
 };
 
+/**
+ * Extract user from Authorization header token
+ * Verifies token and fetches user from KV to get userId
+ */
+export const getUserFromAuthHeader = async (
+  authHeader: string | undefined,
+  getKVClient: () => { get: <T>(key: string) => Promise<T | null> }
+): Promise<{ userId: string; email: string } | null> => {
+  if (!authHeader) {
+    return null;
+  }
+
+  const token = authHeader.replace('Bearer ', '');
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const decoded = verifyToken(token);
+    const kv = getKVClient();
+    const userKey = `memory:user:${decoded.email}`;
+    const user = await kv.get<User>(userKey);
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      userId: user.userId,
+      email: user.email,
+    };
+  } catch (error) {
+    return null;
+  }
+};
+
