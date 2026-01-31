@@ -1,8 +1,10 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors, radius } from "@/constants/theme";
+import { useAuth } from "@/contexts/AuthContext";
+import { authStorage } from "@/lib/auth";
 
 interface Mistake {
   row: number;
@@ -13,6 +15,10 @@ interface Mistake {
 
 export default function ResultsScreen() {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  
   const {
     words: wordsParam,
     userAnswers: userAnswersParam,
@@ -56,6 +62,51 @@ export default function ResultsScreen() {
 
   const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
   const incorrect = total - correct;
+
+  // Save score when component mounts (after calculation)
+  useEffect(() => {
+    if (isAuthenticated && total > 0) {
+      saveScore();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
+
+  const saveScore = async () => {
+    if (saving) return;
+    
+    setSaving(true);
+    setSaveError(null);
+    
+    try {
+      const token = await authStorage.getToken();
+      if (!token) {
+        setSaveError('Not authenticated');
+        return;
+      }
+      const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8001';
+
+      console.log("API_URL being called:", `${API_URL}/api/scores`);      
+      const response = await fetch(`${API_URL}/api/scores`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ score: correct }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setSaveError(data.error || 'Failed to save score');
+      }
+    } catch (error) {
+      setSaveError('Failed to save score');
+      console.error('Score save error:', error);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleHome = () => {
     router.replace("/(tabs)");
