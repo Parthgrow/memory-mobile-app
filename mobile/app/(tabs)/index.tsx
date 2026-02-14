@@ -13,6 +13,8 @@ export default function HomeScreen() {
   const [practiceTimer, setPracticeTimer] = useState("1");
   const [recallTimer, setRecallTimer] = useState("2");
 
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL ; 
+
   const showToast = (type: string, text: string) => {
     Toast.show({
       type: type,
@@ -45,6 +47,8 @@ export default function HomeScreen() {
         <Pressable style={styles.button} onPress={handleStartSession}>
           <Text style={styles.buttonText}>Start a Session</Text>
         </Pressable>
+
+        <Text>{apiUrl ? apiUrl : 'No API URL found'}</Text>
 
         <View style={styles.inputRow}>
           <Text style={styles.label}>Select Rows</Text>

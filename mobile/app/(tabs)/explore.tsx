@@ -128,7 +128,7 @@ export default function ReflectionScreen() {
           const avg =
             count > 0
               ? Math.round(
-                  practiced.reduce((sum, e) => sum + e.score!, 0) / count
+                  practiced.reduce((sum, e) => sum + e.score!, 0) / entries.length
                 )
               : null;
 
