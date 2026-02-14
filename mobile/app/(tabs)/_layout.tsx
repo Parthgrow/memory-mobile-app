@@ -112,6 +112,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="revision"
+        options={{
+          title: "Revision",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="arrow.clockwise" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
