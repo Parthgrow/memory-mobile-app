@@ -296,6 +296,86 @@ app.get('/api/scores/monthly/:month', async (c) => {
 });
 
 
+// GET /api/scores/heatmap?from=YYYY-MM-DD&to=YYYY-MM-DD
+app.get('/api/scores/heatmap', async (c) => {
+  try {
+    const authHeader = c.req.header('Authorization');
+    const user = await getUserFromAuthHeader(authHeader, getKVClient);
+
+    if (!user) {
+      return c.json({ error: 'Unauthorized' }, 401);
+    }
+
+    const from = c.req.query('from');
+    const to = c.req.query('to');
+
+    if (!from || !to) {
+      return c.json({ error: '"from" and "to" query params are required' }, 400);
+    }
+
+    if (from > to) {
+      return c.json({ error: '"from" must be before "to"' }, 400);
+    }
+
+    const kv = getKVClient();
+
+    // Determine which months are spanned by the range
+    const months: string[] = [];
+    const startMonth = from.substring(0, 7);
+    const endMonth = to.substring(0, 7);
+    let current = startMonth;
+    while (current <= endMonth) {
+      months.push(current);
+      const [y, m] = current.split('-').map(Number);
+      const next = m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`;
+      current = next;
+    }
+
+    // Fetch all monthly indexes in parallel
+    const indexResults = await Promise.all(
+      months.map(month =>
+        kv.get<string[]>(`memory:score-index:${user.userId}:${month}`)
+      )
+    );
+
+    // Flatten and filter dates within [from, to]
+    const allDates: string[] = [];
+    for (const dates of indexResults) {
+      if (!dates) continue;
+      for (const d of dates) {
+        if (d >= from && d <= to) {
+          allDates.push(d);
+        }
+      }
+    }
+
+    if (allDates.length === 0) {
+      return c.json({ scores: {}, from, to });
+    }
+
+    // Fetch all daily scores in parallel
+    const dailyScores = await Promise.all(
+      allDates.map(date =>
+        kv.get<DailyScore>(`memory:score:${user.userId}:${date}`)
+      )
+    );
+
+    // Build date → score map
+    const scores: Record<string, number> = {};
+    for (let i = 0; i < allDates.length; i++) {
+      const s = dailyScores[i];
+      if (s) {
+        scores[allDates[i]] = s.highestScore;
+      }
+    }
+
+    return c.json({ scores, from, to });
+  } catch (error) {
+    console.error('Heatmap fetch error:', error);
+    return c.json({ error: 'Internal server error' }, 500);
+  }
+});
+
 const port = 8001
 console.log(`Server is running on port ${port}`);
 
