@@ -47,6 +47,12 @@ export interface DailyScore {
   updatedAt: number;
 }
 
+export interface HeatmapResponse {
+  scores: Record<string, number>;
+  from: string;
+  to: string;
+}
+
 export interface MonthlySummary {
   month: string;
   practiceDays: number;
@@ -152,6 +158,23 @@ export const api = {
     }
 
     return request<DailyScore | null>(`/api/scores/daily/${date}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  getHeatmap: async (
+    from: string,
+    to: string
+  ): Promise<ApiResponse<HeatmapResponse>> => {
+    const token = await authStorage.getToken();
+    if (!token) {
+      return { error: 'Not authenticated' };
+    }
+
+    return request<HeatmapResponse>(`/api/scores/heatmap?from=${from}&to=${to}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
