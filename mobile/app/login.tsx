@@ -66,6 +66,8 @@ export default function LoginScreen() {
             : 'Sign in to continue'}
         </Text>
 
+        <Text>{process.env.EXPO_PUBLIC_API_URL}</Text>
+
         <View style={styles.form}>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Email</Text>
