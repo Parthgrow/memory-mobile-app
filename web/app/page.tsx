@@ -50,12 +50,20 @@ export default function Home() {
         <span className="text-xl font-bold text-stone-900 tracking-tight">
           MindGym
         </span>
-        <Link
-          href="/privacy-policy"
-          className="text-sm text-stone-500 hover:text-stone-800 transition-colors"
-        >
-          Privacy Policy
-        </Link>
+        <div className="flex items-center gap-6 text-sm">
+          <Link
+            href="/privacy-policy"
+            className="text-stone-500 hover:text-stone-800 transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/contact"
+            className="text-stone-500 hover:text-stone-800 transition-colors"
+          >
+            Contact
+          </Link>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -179,12 +187,12 @@ export default function Home() {
             >
               Privacy Policy
             </Link>
-            <a
-              href="mailto:parthagarwal1984@gmail.com"
+            <Link
+              href="/contact"
               className="hover:text-stone-600 transition-colors"
             >
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
