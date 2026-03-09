@@ -1,29 +1,6 @@
- "use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 
-const GMAIL_COMPOSE_URL =
-  "https://mail.google.com/mail/?view=cm&fs=1&to=parthagarwal1984@gmail.com";
-
-export default function ContactPage() {
-  useEffect(() => {
-    try {
-      const width = 720;
-      const height = 600;
-      const left = window.screenX + (window.outerWidth - width) / 2;
-      const top = window.screenY + (window.outerHeight - height) / 2;
-
-      window.open(
-        GMAIL_COMPOSE_URL,
-        "gmailComposeWindow",
-        `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
-      );
-    } catch {
-      // If window.open fails (e.g., popup blocked), user can use the fallback link below.
-    }
-  }, []);
-
+export default function AccountDeletionPage() {
   return (
     <div className="min-h-screen" style={{ background: "var(--background)" }}>
       {/* Nav */}
@@ -45,56 +22,22 @@ export default function ContactPage() {
       {/* Header */}
       <div className="max-w-3xl mx-auto px-6 pt-10 pb-8 border-b border-stone-100">
         <span className="inline-block bg-orange-100 text-orange-700 text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full mb-4">
-          Contact & Account
+          Account
         </span>
         <h1 className="text-3xl font-bold text-stone-900 mb-3">
-          Contact & Account Deletion
+          Account Deletion & Data Retention
         </h1>
         <p className="text-stone-500 text-sm">
-          This page explains how to contact MindGym and how to request deletion
-          of your account and data.
+          This page explains how MindGym users can request deletion of their
+          account and what happens to their data.
         </p>
       </div>
 
       {/* Content */}
       <main className="max-w-3xl mx-auto px-6 py-12 space-y-10">
-        {/* Contact section */}
         <section className="space-y-3">
           <h2 className="text-xl font-semibold text-stone-900">
-            Contact MindGym
-          </h2>
-          <p className="text-stone-600 text-sm leading-relaxed">
-            For any questions, feedback, or support, you can reach us at:
-          </p>
-          <a
-            href="mailto:parthagarwal1984@gmail.com"
-            className="inline-block text-orange-600 font-medium hover:underline text-sm"
-          >
-            parthagarwal1984@gmail.com
-          </a>
-          <p className="text-stone-600 text-sm leading-relaxed">
-            A Gmail compose window addressed to{" "}
-            <span className="font-medium text-stone-700">
-              parthagarwal1984@gmail.com
-            </span>{" "}
-            should have opened as a popup when you opened this page. If it
-            didn&apos;t open (for example, if your browser blocked popups), you
-            can open Gmail manually:
-          </p>
-          <a
-            href={GMAIL_COMPOSE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl border border-stone-200 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors"
-          >
-            Open Gmail compose
-          </a>
-        </section>
-
-        {/* Account deletion section */}
-        <section className="space-y-3">
-          <h2 className="text-xl font-semibold text-stone-900">
-            How to request account deletion
+            How to request deletion
           </h2>
           <p className="text-stone-600 text-sm leading-relaxed">
             To delete your MindGym account, please send an email from the email
@@ -146,6 +89,21 @@ export default function ContactPage() {
             provider may temporarily retain data for up to 30 days for security,
             reliability, and legal compliance. These backups are automatically
             purged and are not used to recreate deleted accounts or profiles.
+          </p>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-xl font-semibold text-stone-900">Questions</h2>
+          <p className="text-stone-600 text-sm leading-relaxed">
+            If you have any questions about account deletion or data retention,
+            contact us at{" "}
+            <a
+              href="mailto:parthagarwal1984@gmail.com"
+              className="text-orange-600 font-medium hover:underline"
+            >
+              parthagarwal1984@gmail.com
+            </a>
+            .
           </p>
         </section>
       </main>
