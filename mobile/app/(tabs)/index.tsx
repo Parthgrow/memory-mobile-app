@@ -48,7 +48,7 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Start a Session</Text>
         </Pressable>
 
-        <Text>{apiUrl ? apiUrl : 'No API URL found'}</Text>
+        {__DEV__ && <Text>{apiUrl ? apiUrl : 'No API URL found'}</Text>}
 
         <View style={styles.inputRow}>
           <Text style={styles.label}>Select Rows</Text>

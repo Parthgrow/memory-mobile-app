@@ -122,11 +122,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="revision"
+        name="profile"
         options={{
-          title: "Revision",
+          title: "Profile",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="arrow.clockwise" color={color} />
+            <IconSymbol size={28} name="person.fill" color={color} />
           ),
         }}
       />

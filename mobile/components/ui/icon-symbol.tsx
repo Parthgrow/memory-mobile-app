@@ -21,6 +21,7 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'arrow.clockwise': 'refresh',
   'square.grid.2x2.fill': 'apps',
+  'person.fill': 'person',
 } as IconMapping;
 
 /**
