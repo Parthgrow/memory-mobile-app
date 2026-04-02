@@ -326,7 +326,9 @@ app.get('/api/scores/heatmap', async (c) => {
     let current = startMonth;
     while (current <= endMonth) {
       months.push(current);
-      const [y, m] = current.split('-').map(Number);
+      const parts = current.split('-').map(Number);
+      const y = parts[0]!;
+      const m = parts[1]!;
       const next = m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`;
       current = next;
     }
@@ -365,7 +367,7 @@ app.get('/api/scores/heatmap', async (c) => {
     for (let i = 0; i < allDates.length; i++) {
       const s = dailyScores[i];
       if (s) {
-        scores[allDates[i]] = s.highestScore;
+        scores[allDates[i]!] = s.highestScore;
       }
     }
 

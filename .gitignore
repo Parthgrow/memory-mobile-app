@@ -56,3 +56,4 @@ web/node_modules
 
 # Backend (add paths here when you have backend code)
 backend/node_modules/
+backend/dist/
