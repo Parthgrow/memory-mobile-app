@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Linking, Pressable, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { Colors, radius } from "@/constants/theme";
@@ -23,6 +23,20 @@ export default function ProfileScreen() {
       </View>
 
       <Text style={styles.email}>{user?.email ?? "—"}</Text>
+
+      <Pressable
+        style={styles.linkButton}
+        onPress={() => Linking.openURL("https://memory-mobile-app.vercel.app/privacy-policy")}
+      >
+        <Text style={styles.linkText}>Privacy Policy</Text>
+      </Pressable>
+
+      <Pressable
+        style={styles.linkButton}
+        onPress={() => Linking.openURL("https://memory-mobile-app.vercel.app/contact")}
+      >
+        <Text style={styles.linkText}>Contact Developer</Text>
+      </Pressable>
 
       <Pressable style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
@@ -57,6 +71,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.textPrimary,
     marginBottom: 40,
+  },
+  linkButton: {
+    width: "100%",
+    paddingVertical: 14,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  linkText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: Colors.primary,
   },
   logoutButton: {
     width: "100%",
